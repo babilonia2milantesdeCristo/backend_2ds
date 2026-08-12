@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cristo Rei | Santuário Digital</title>
+    
+    <!-- Fontes Premium Inter e Cinzel para o tema majestoso -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Reset e Sistema de Design Avançado */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        :root {
+            --gold-light: #fff2af;
+            --gold-main: #d4af37;
+            --gold-dark: #aa841c;
+            --bg-deep: #0a0d10;
+            --card-bg: rgba(10, 13, 16, 0.45);
+            --card-border: rgba(214, 175, 55, 0.18);
+            --text-pure: #ffffff;
+            --text-soft: #cbd5e1;
+            --text-gold: #f3e5ab;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-pure);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        /* Fundo Cinematográfico Dinâmico (Luzes de Aurora e Raios de Sol Posteriores) */
+        .ambient-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .nebula-glow-1 {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(214, 175, 55, 0.12) 0%, rgba(214, 175, 55, 0) 70%);
+            top: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            filter: blur(40px);
+            animation: pulseGlow 8s ease-in-out infinite alternate;
+        }
+
+        .nebula-glow-2 {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(170, 132, 28, 0.08) 0%, rgba(0, 0, 0, 0) 60%);
+            bottom: -5%;
+            right: 10%;
+            filter: blur(50px);
+        }
+
+        /* Linhas Sacras de Grade Geométrica Fina no Fundo */
+        .bg-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(214, 175, 55, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(214, 175, 55, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: center;
+            mask-image: radial-gradient(circle, black 30%, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle, black 30%, transparent 80%);
+        }
+
+        /* Obra-Prima Card Glassmorphism com Efeito de Flutuação 3D */
+        .luxury-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(25px) saturate(160%);
+            -webkit-backdrop-filter: blur(25px) saturate(160%);
+            border: 1px solid var(--card-border);
+            padding: 4rem 3rem;
+            border-radius: 32px;
+            text-align: center;
+            max-width: 460px;
+            width: 90%;
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.6),
+                0 0 80px rgba(214, 175, 55, 0.03),
+                inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            z-index: 1;
+            transform-style: preserve-3d;
+            animation: cardEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            position: relative;
+        }
+
+        /* Borda de Brilho Dinâmico Superior */
+        .luxury-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-main), transparent);
+        }
+
+        /* Emblema Sagrado: Coroa Triunfal sobre a Cruz */
+        .emblem-wrapper {
+            width: 96px;
+            height: 96px;
+            background: radial-gradient(circle, rgba(214, 175, 55, 0.15) 0%, rgba(214, 175, 55, 0.02) 100%);
+            border: 1px solid rgba(214, 175, 55, 0.3);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 2rem;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Resplendor de Luz atrás do Emblema */
+        .emblem-halo {
+            position: absolute;
+            width: 130%;
+            height: 130%;
+            border: 1px dashed rgba(214, 175, 55, 0.15);
+            border-radius: 50%;
+            animation: rotateHalo 20s linear infinite;
+        }
+
+        .emblem-wrapper svg {
+            width: 44px;
+            height: 44px;
+            fill: url(#goldGradient);
+            filter: drop-shadow(0 4px 8px rgba(214, 175, 55, 0.3));
+            transition: transform 0.5s ease;
+        }
+
+        .luxury-card:hover .emblem-wrapper {
+            transform: scale(1.05) translateY(-5px);
+            border-color: var(--gold-main);
+            box-shadow: 0 15px 40px rgba(214, 175, 55, 0.2);
+        }
+
+        .luxury-card:hover .emblem-wrapper svg {
+            transform: scale(1.08);
+        }
+
+        /* Tipografia Majestosa - Cinzel */
+        h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+            background: linear-gradient(180deg, var(--text-pure) 30%, var(--gold-light) 70%, var(--gold-main) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5));
+        }
+
+        /* Subtítulo Sofisticado */
+        p {
+            font-size: 1.15rem;
+            color: var(--text-soft);
+            margin-bottom: 3.5rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            background: linear-gradient(90deg, var(--text-soft), var(--text-gold), var(--text-soft));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Botão Alta-Costura Web / Rota Mantida */
+        .btn-luxury {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            width: 100%;
+            padding: 1.2rem 2rem;
+            background: linear-gradient(135deg, #1e242b 0%, #0f1216 100%);
+            color: var(--gold-main);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border-radius: 16px;
+            border: 1px solid rgba(214, 175, 55, 0.4);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Efeito de Reflexo de Luz Metálico ao Passar o Mouse */
+        .btn-luxury::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 120%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 242, 175, 0.15), transparent);
+            transform: skewX(-25deg);
+            transition: all 0.75s ease;
+        }
+
+        .btn-luxury:hover::before {
+            left: 150%;
+        }
+
+        .btn-luxury:hover {
+            color: #000000;
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-main) 100%);
+            border-color: var(--gold-light);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(214, 175, 55, 0.25);
+        }
+
+        .btn-luxury:active {
+            transform: translateY(-1px);
+        }
+
+        /* Ícone Vetorial Interativo do Botão */
+        .btn-luxury svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: var(--gold-main);
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-luxury:hover svg {
+            stroke: #000000;
+            transform: translateX(5px);
+        }
+
+        /* Animações de Alta Performance CSS */
+        @keyframes cardEntrance {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.96);
+                filter: blur(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+            100% { transform: translateX(-50%) scale(1.15); opacity: 1; }
+        }
+
+        @keyframes rotateHalo {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Camada de Efeitos de Luz de Fundo Artística -->
+    <div class="ambient-background">
+        <div class="bg-grid"></div>
+        <div class="nebula-glow-1"></div>
+        <div class="nebula-glow-2"></div>
+    </div>
+
